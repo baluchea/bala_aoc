@@ -1,0 +1,44 @@
+managed
+//In Case Developer want to plug extra coding ,this is the class where we can do it
+implementation in class zbp_ats_ab_travel1 unique;
+strict ( 2 );
+
+//Root Entity Behavior
+define behavior for zats_ab_travel1 alias Travel
+persistent table /dmo/travel_m
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  create;
+  update;
+  delete;
+  //field ( readonly ) TravelId;
+  association _Booking { create; }
+}
+
+define behavior for zats_ab_booking alias Booking
+persistent table /dmo/booking_m
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TravelId;
+  association _Travel;
+  association _BookingSuppl { create; }
+}
+
+define behavior for zats_ab_booksuppl alias BookSuppl
+persistent table /dmo/booksuppl_m
+lock dependent by _Travel
+authorization dependent by _Travel
+etag master LastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) TravelId, BookingId;
+  association _Travel;
+  association _Booking;
+}

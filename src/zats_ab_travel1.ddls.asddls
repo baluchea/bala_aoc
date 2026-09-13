@@ -13,9 +13,21 @@ define root view entity zats_ab_travel1
       @ObjectModel.text.element: [ 'Description' ]
   key travel_id       as TravelId,
       @ObjectModel.text.element: [ 'AgencyName' ]
+      @Consumption.valueHelpDefinition: [{  
+                    entity:{
+                    name: '/DMO/I_Agency',
+                    element: 'AgencyID'
+                    }
+                    }]
       agency_id       as AgencyId,
       _Agency.Name    as AgencyName,
       @ObjectModel.text.element: [ 'CustomerName' ]
+      @Consumption.valueHelpDefinition: [{  
+                    entity:{
+                    name: '/DMO/I_Customer',
+                    element: 'CustomerID'
+                    }
+                    }] 
       customer_id     as CustomerId,
       concat(concat( _Customer.FirstName, ' ' ), _Customer.LastName ) as CustomerName,
       begin_date      as BeginDate,
@@ -24,9 +36,21 @@ define root view entity zats_ab_travel1
       booking_fee     as BookingFee,
       @Semantics.amount.currencyCode: 'CurrencyCode'
       total_price     as TotalPrice,
+      @Consumption.valueHelpDefinition: [{  
+                    entity:{
+                    name: 'I_Currency',
+                    element: 'Currency'
+                    }
+                    }]
       currency_code   as CurrencyCode,
       description     as Description,
-      @ObjectModel.text.element: [ 'StatusText' ]      
+      @ObjectModel.text.element: [ 'StatusText' ]
+      @Consumption.valueHelpDefinition: [{  
+                    entity:{
+                    name: '/DMO/I_Overall_Status_VH',
+                    element: 'OverallStatus'
+                    }
+                    }]      
       overall_status  as OverallStatus,
       case overall_status
         when 'O' then 2

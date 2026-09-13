@@ -14,8 +14,20 @@ association[1..*] to /DMO/I_SupplementText as _SupplementText
 {
     key /dmo/booksuppl_m.travel_id as TravelId,
     key /dmo/booksuppl_m.booking_id as BookingId,
+    @Consumption.valueHelpDefinition: [{  
+                    entity:{
+                    name: '/DMO/I_Supplement',
+                    element: 'SupplementID'
+                    }
+                    }]
     key /dmo/booksuppl_m.booking_supplement_id as BookingSupplementId,
     /dmo/booksuppl_m.supplement_id as SupplementId,
+    @Consumption.valueHelpDefinition: [{  
+                    entity:{
+                    name: 'I_Currency',
+                    element: 'Currency'
+                    }
+                    }]
     @Semantics.amount.currencyCode: 'CurrencyCode'
     /dmo/booksuppl_m.price as Price,
     /dmo/booksuppl_m.currency_code as CurrencyCode,
